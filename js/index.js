@@ -44,22 +44,20 @@ async function sendEmail() {
     email: document.getElementById('email').value,
     message: document.getElementById('message').value
   };
-
+    let successMessage = document.getElementById('succes');
+    successMessage.classList.add('animate__animated', 'animate__fadeIn');
+    successMessage.style.display = 'block';
   try {
     setTimeout(function () {
     const response = await emailjs.send('service_z0jesxd', 'template_22dv8yn', templateParams);
     let modal = document.getElementById('modal');
     modal.classList.add('animate__fadeOut');
-    let successMessage = document.getElementById('succes');
-    successMessage.classList.add('animate__animated', 'animate__fadeIn');
-    successMessage.style.display = 'block';
-      successMessage.style.display = 'none';
-      modal.style.display = 'none';
-    }, 2000);
-  } catch (error) {
-    console.error('Произошла ошибка при отправке письма:', error);
-    alert('Произошла ошибка при отправке письма.');
-  }
+    successMessage.style.display = 'none';
+        }, 2000);
+      } catch (error) {
+        console.error('Произошла ошибка при отправке письма:', error);
+        alert('Произошла ошибка при отправке письма.');
+    }
 }
 
 
