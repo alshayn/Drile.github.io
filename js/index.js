@@ -33,32 +33,37 @@ function closeModal() {
 openModalButton.addEventListener('click', openModal);
 // Слушаем события для закрытия модального окна при нажатии на крестик
 closeButton.addEventListener('click', closeModal);
-
 (async function () {
   emailjs.init("zTa03pXrp5LTY-OwU");
 })();
 
 async function sendEmail() {
+  event.preventDefault(); // Предотвращаем отправку формы по умолчанию
+
   const templateParams = {
     name: document.getElementById('name').value,
     email: document.getElementById('email').value,
     message: document.getElementById('message').value
   };
-    let successMessage = document.getElementById('succes');
-    successMessage.classList.add('animate__animated', 'animate__fadeIn');
-    successMessage.style.display = 'block';
+
   try {
-    setTimeout(function () {
     const response = await emailjs.send('service_z0jesxd', 'template_22dv8yn', templateParams);
     let modal = document.getElementById('modal');
     modal.classList.add('animate__fadeOut');
-    successMessage.style.display = 'none';
-        }, 2000);
-      } catch (error) {
-        console.error('Произошла ошибка при отправке письма:', error);
-        alert('Произошла ошибка при отправке письма.');
-    }
+    let successMessage = document.getElementById('succes');
+    successMessage.classList.add('animate__animated', 'animate__fadeIn');
+    successMessage.style.display = 'block';
+    setTimeout(function () {
+      successMessage.style.display = 'none';
+      modal.style.display = 'none';
+    }, 2000);
+  } catch (error) {
+    console.error('Произошла ошибка при отправке письма:', error);
+    alert('Произошла ошибка при отправке письма.');
+  }
+  return false; // Возвращаем false, чтобы предотвратить перезагрузку страницы
 }
+
 
 
 
