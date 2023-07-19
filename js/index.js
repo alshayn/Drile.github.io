@@ -34,17 +34,11 @@ openModalButton.addEventListener('click', openModal);
 // Слушаем события для закрытия модального окна при нажатии на крестик
 closeButton.addEventListener('click', closeModal);
 
+// Отправка письма с помощью EmailJs
 (function () {
-    emailjs.init("zTa03pXrp5LTY-OwU");
+    emailjs.init("zTa03pXrp5LTY-OwU"); // Замените YOUR_USER_ID на ваш User ID из EmailJS
 })();
-
-(function () {
-    emailjs.init("zTa03pXrp5LTY-OwU");
-})();
-
 function sendEmail() {
-    event.preventDefault(); // Предотвращаем отправку формы по умолчанию
-
     const templateParams = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
@@ -53,25 +47,12 @@ function sendEmail() {
 
     emailjs.send('service_z0jesxd', 'template_22dv8yn', templateParams)
         .then(function (response) {
-            // Показываем модальное окно с сообщением об успешной отправке
-            let modal = document.getElementById('modal');
-            modal.classList.add('animate__fadeOut');
-
-            let successMessage = document.getElementById('successMessage');
-            successMessage.classList.add('animate__animated', 'animate__fadeIn');
-            successMessage.style.display = 'block';
-
-            // Сброс формы и скрытие модального окна через 2 секунды
-            setTimeout(function () {
-                document.getElementById('form').reset();
-                successMessage.style.display = 'none';
-                modal.style.display = 'none';
-            }, 2000);
-
+            alert('Письмо успешно отправлено!');
         }, function (error) {
             alert('Произошла ошибка при отправке письма.');
         });
-}
+};
+
 
 
 
