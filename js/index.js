@@ -34,29 +34,13 @@ openModalButton.addEventListener('click', openModal);
 // Слушаем события для закрытия модального окна при нажатии на крестик
 closeButton.addEventListener('click', closeModal);
 
-// Отправка формы внутри модального окна, и модальное окно с успешной отправкой формы
-// let form = document.getElementById('form')
-// let submitButton = document.getElementById('submitButton');
-// let succes = document.getElementById('succes');
-// form.addEventListener('submit', function (event) {
-//     event.preventDefault();
-//     succes.classList.add('animate__animated', 'animate__fadeIn')
-//     // Показываем окно
-//     succes.style.display = 'block';
-//     modal.classList.add('animate__fadeOut')
-//     setTimeout(function () {
-//         succes.style.display = 'none';
-//         document.getElementById('form').submit();
-//         form.reset();
-//         modal.style.display = 'none';
-//     }, 2000);
-// });
-
-// Отправка письма с помощью EmailJs
 (function () {
-    emailjs.init("zTa03pXrp5LTY-OwU"); // Замените YOUR_USER_ID на ваш User ID из EmailJS
+    emailjs.init("zTa03pXrp5LTY-OwU");
 })();
+
 function sendEmail() {
+    event.preventDefault(); // Предотвращаем отправку формы по умолчанию
+
     const templateParams = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
@@ -65,11 +49,26 @@ function sendEmail() {
 
     emailjs.send('service_z0jesxd', 'template_22dv8yn', templateParams)
         .then(function (response) {
-            alert('Письмо успешно отправлено!');
+            // Показываем модальное окно с сообщением об успешной отправке
+            let modal = document.getElementById('modal');
+            modal.classList.add('animate__fadeOut');
+
+            let successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('animate__animated', 'animate__fadeIn');
+            successMessage.style.display = 'block';
+
+            // Сброс формы и скрытие модального окна через 2 секунды
+            setTimeout(function () {
+                document.getElementById('form').reset();
+                successMessage.style.display = 'none';
+                modal.style.display = 'none';
+            }, 2000);
+
         }, function (error) {
             alert('Произошла ошибка при отправке письма.');
         });
 }
+
 
 
 
