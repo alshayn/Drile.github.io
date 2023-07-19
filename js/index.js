@@ -50,7 +50,7 @@ function sendEmail() {
             // alert('Письмо успешно отправлено!');
             let modal = document.getElementById('modal');
             modal.classList.add('animate__fadeOut');
-            let successMessage = document.getElementById('successMessage');
+            let successMessage = document.getElementById('succes');
             successMessage.classList.add('animate__animated', 'animate__fadeIn');
             successMessage.style.display = 'block';
             setTimeout(function () {
