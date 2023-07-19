@@ -38,6 +38,10 @@ closeButton.addEventListener('click', closeModal);
     emailjs.init("zTa03pXrp5LTY-OwU");
 })();
 
+(function () {
+    emailjs.init("zTa03pXrp5LTY-OwU");
+})();
+
 function sendEmail() {
     event.preventDefault(); // Предотвращаем отправку формы по умолчанию
 
@@ -68,6 +72,7 @@ function sendEmail() {
             alert('Произошла ошибка при отправке письма.');
         });
 }
+
 
 
 
