@@ -46,13 +46,13 @@ async function sendEmail() {
   };
 
   try {
+    setTimeout(function () {
     const response = await emailjs.send('service_z0jesxd', 'template_22dv8yn', templateParams);
     let modal = document.getElementById('modal');
     modal.classList.add('animate__fadeOut');
     let successMessage = document.getElementById('succes');
     successMessage.classList.add('animate__animated', 'animate__fadeIn');
     successMessage.style.display = 'block';
-    setTimeout(function () {
       successMessage.style.display = 'none';
       modal.style.display = 'none';
     }, 2000);
