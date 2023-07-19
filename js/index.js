@@ -47,7 +47,16 @@ function sendEmail() {
 
     emailjs.send('service_z0jesxd', 'template_22dv8yn', templateParams)
         .then(function (response) {
-            alert('Письмо успешно отправлено!');
+            // alert('Письмо успешно отправлено!');
+            let modal = document.getElementById('modal');
+            modal.classList.add('animate__fadeOut');
+            let successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('animate__animated', 'animate__fadeIn');
+            successMessage.style.display = 'block';
+            setTimeout(function () {
+                successMessage.style.display = 'none';
+                modal.style.display = 'none';
+              }, 2000);
         }, function (error) {
             alert('Произошла ошибка при отправке письма.');
         });
